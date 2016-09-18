@@ -79,6 +79,7 @@ import org.apache.ofbiz.service.GenericServiceException;
 import org.apache.ofbiz.service.LocalDispatcher;
 import org.apache.ofbiz.service.ModelService;
 import org.apache.ofbiz.service.ServiceUtil;
+import org.apache.ofbiz.webapp.WebAppUtil;
 import org.apache.ofbiz.webapp.stats.VisitHandler;
 
 /**
@@ -95,7 +96,7 @@ public class LoginWorker {
 
     private static final String keyValue = UtilProperties.getPropertyValue(securityProperties, "login.secret_key_string");
     /** This Map is keyed by the randomly generated externalLoginKey and the value is a UserLogin GenericValue object */
-    public static Map<String, GenericValue> externalLoginKeys = new ConcurrentHashMap<String, GenericValue>();
+    private static Map<String, GenericValue> externalLoginKeys = new ConcurrentHashMap<String, GenericValue>();
 
     public static StringWrapper makeLoginUrl(PageContext pageContext) {
         return makeLoginUrl(pageContext, "checkLogin");
@@ -475,7 +476,7 @@ public class LoginWorker {
                 try {
                     // after this line the delegator is replaced with the new per-tenant delegator
                     delegator = DelegatorFactory.getDelegator(delegatorName);
-                    dispatcher = ContextFilter.makeWebappDispatcher(servletContext, delegator);
+                    dispatcher = WebAppUtil.makeWebappDispatcher(servletContext, delegator);
                 } catch (NullPointerException e) {
                     Debug.logError(e, "Error getting tenant delegator", module);
                     Map<String, String> messageMap = UtilMisc.toMap("errorMessage", "Tenant [" + tenantId + "]  not found...");
@@ -494,7 +495,7 @@ public class LoginWorker {
             try {
                 // after this line the delegator is replaced with default delegator
                 delegator = DelegatorFactory.getDelegator(delegatorName);
-                dispatcher = ContextFilter.makeWebappDispatcher(servletContext, delegator);
+                dispatcher = WebAppUtil.makeWebappDispatcher(servletContext, delegator);
             } catch (NullPointerException e) {
                 Debug.logError(e, "Error getting default delegator", module);
                 Map<String, String> messageMap = UtilMisc.toMap("errorMessage", "Error getting default delegator");
@@ -748,7 +749,7 @@ public class LoginWorker {
             session.setAttribute("delegatorName", delegatorName);
 
             delegator = DelegatorFactory.getDelegator(delegatorName);
-            LocalDispatcher dispatcher = ContextFilter.makeWebappDispatcher(session.getServletContext(), delegator);
+            LocalDispatcher dispatcher = WebAppUtil.makeWebappDispatcher(session.getServletContext(), delegator);
             setWebContextObjects(request, response, delegator, dispatcher);
         }
 
@@ -1058,13 +1059,11 @@ public class LoginWorker {
         if (userLogin != null) {
             //to check it's the right tenant
             //in case username and password are the same in different tenants
-            LocalDispatcher dispatcher = (LocalDispatcher) request.getAttribute("dispatcher");
             Delegator delegator = (Delegator) request.getAttribute("delegator");
             String oldDelegatorName = delegator.getDelegatorName();
-            ServletContext servletContext = session.getServletContext();
             if (!oldDelegatorName.equals(userLogin.getDelegator().getDelegatorName())) {
                 delegator = DelegatorFactory.getDelegator(userLogin.getDelegator().getDelegatorName());
-                dispatcher = ContextFilter.makeWebappDispatcher(servletContext, delegator);
+                LocalDispatcher dispatcher = WebAppUtil.makeWebappDispatcher(session.getServletContext(), delegator);
                 setWebContextObjects(request, response, delegator, dispatcher);
             }
             // found userLogin, do the external login...
