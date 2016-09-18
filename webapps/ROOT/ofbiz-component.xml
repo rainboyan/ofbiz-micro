@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ofbiz-component name="ROOT"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/ofbiz-component.xsd">
+    <!-- define resource loaders; most common is to use the component resource loader -->
+    <resource-loader name="main" type="component"/>
+
+    <!-- web applications; will be mounted when using the embedded container -->
+    <webapp name="ROOT"
+        title="ROOT"
+        server="default-server"
+        location="webapp/ROOT"
+        base-permission=""
+        mount-point="/"/>
+</ofbiz-component>
