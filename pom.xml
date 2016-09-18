@@ -61,11 +61,12 @@
         <jackson.version>2.8.2</jackson.version>
         <javolution.version>5.4.3</javolution.version>
         <juel.version>2.2.7</juel.version>
-        <log4j.version>2.3</log4j.version>
+        <log4j.version>2.6.2</log4j.version>
         <nekohtml.version>1.9.22</nekohtml.version>
         <oro.version>2.0.8</oro.version>
         <rome.version>1.0</rome.version>
         <shiro.version>1.3.1</shiro.version>
+        <slf4j.version>1.7.21</slf4j.version>
         <tomcat.version>8.0.36</tomcat.version>
         <wsdl4j.version>1.6.2</wsdl4j.version>
         <xmlrpc.version>3.1.3</xmlrpc.version>
@@ -277,6 +278,11 @@
             <version>${log4j.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
             <version>${javax.mail.version}</version>
@@ -388,6 +394,16 @@
             <artifactId>shiro-core</artifactId>
             <version>${shiro.version}</version>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.tomcat</groupId>
