@@ -4,12 +4,12 @@
     <parent>
         <groupId>org.apache</groupId>
         <artifactId>apache</artifactId>
-        <version>16</version>
+        <version>18</version>
         <relativePath></relativePath>
     </parent>
 
     <groupId>com.alphasoft.ofbiz</groupId>
-    <artifactId>ofbiz-framework</artifactId>
+    <artifactId>ofbiz-micro</artifactId>
     <version>16.10-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -65,7 +65,7 @@
         <nekohtml.version>1.9.22</nekohtml.version>
         <oro.version>2.0.8</oro.version>
         <rome.version>1.0</rome.version>
-        <shiro.version>1.3.1</shiro.version>
+        <shiro.version>1.3.2</shiro.version>
         <slf4j.version>1.7.21</slf4j.version>
         <tomcat.version>8.0.36</tomcat.version>
         <wsdl4j.version>1.6.2</wsdl4j.version>
