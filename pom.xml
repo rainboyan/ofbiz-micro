@@ -10,7 +10,7 @@
 
     <groupId>com.alphasoft.ofbiz</groupId>
     <artifactId>ofbiz-micro</artifactId>
-    <version>16.10-SNAPSHOT</version>
+    <version>16.11-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>AlphaSoft OFBiz Framework</name>
@@ -533,14 +533,6 @@
             </resource>
             <resource>
                 <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>**/*.xml</include>
-                    <include>**/*.properties</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>framework/config</directory>
                 <filtering>true</filtering>
                 <includes>
                     <include>**</include>
