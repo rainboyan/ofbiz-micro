@@ -148,10 +148,10 @@ public class ServiceMultiEventHandler implements EventHandler {
         }
 
         // some default message settings
-        String errorPrefixStr = UtilProperties.getMessage("DefaultMessages", "service.error.prefix", locale);
-        String errorSuffixStr = UtilProperties.getMessage("DefaultMessages", "service.error.suffix", locale);
-        String messagePrefixStr = UtilProperties.getMessage("DefaultMessages", "service.message.prefix", locale);
-        String messageSuffixStr = UtilProperties.getMessage("DefaultMessages", "service.message.suffix", locale);
+        String errorPrefixStr = UtilProperties.getMessage("DefaultMessagesUiLabels", "service.error.prefix", locale);
+        String errorSuffixStr = UtilProperties.getMessage("DefaultMessagesUiLabels", "service.error.suffix", locale);
+        String messagePrefixStr = UtilProperties.getMessage("DefaultMessagesUiLabels", "service.message.prefix", locale);
+        String messageSuffixStr = UtilProperties.getMessage("DefaultMessagesUiLabels", "service.message.suffix", locale);
 
         // prepare the error message and success message lists
         List<Object> errorMessages = new LinkedList<Object>();
@@ -345,13 +345,13 @@ public class ServiceMultiEventHandler implements EventHandler {
                     }
 
                     // get the success messages
-                    if (!UtilValidate.isEmpty(result.get(ModelService.SUCCESS_MESSAGE))) {
+                    if (UtilValidate.isNotEmpty(result.get(ModelService.SUCCESS_MESSAGE))) {
                         String newSuccessMessage = (String)result.get(ModelService.SUCCESS_MESSAGE);
                         if (!successMessages.contains(newSuccessMessage)) {
                             successMessages.add(newSuccessMessage);
                         }
                     }
-                    if (!UtilValidate.isEmpty(result.get(ModelService.SUCCESS_MESSAGE_LIST))) {
+                    if (UtilValidate.isNotEmpty(result.get(ModelService.SUCCESS_MESSAGE_LIST))) {
                         List<String> newSuccessMessages = UtilGenerics.<String>checkList(result.get(ModelService.SUCCESS_MESSAGE_LIST));
                         for (int j = 0; j < newSuccessMessages.size(); j++) {
                             String newSuccessMessage = newSuccessMessages.get(j);

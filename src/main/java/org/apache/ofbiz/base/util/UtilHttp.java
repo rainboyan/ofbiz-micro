@@ -618,7 +618,7 @@ public final class UtilHttp {
         }
 
         // no user locale? before global default try appDefaultLocale if specified
-        if (localeObject == null && !UtilValidate.isEmpty(appDefaultLocale)) {
+        if (localeObject == null && UtilValidate.isNotEmpty(appDefaultLocale)) {
             localeObject = appDefaultLocale;
         }
 
@@ -747,7 +747,7 @@ public final class UtilHttp {
         }
 
         // no user currency? before global default try appDefaultCurrencyUom if specified
-        if (iso == null && !UtilValidate.isEmpty(appDefaultCurrencyUom)) {
+        if (iso == null && UtilValidate.isNotEmpty(appDefaultCurrencyUom)) {
             iso = appDefaultCurrencyUom;
         }
 
@@ -1438,7 +1438,7 @@ public final class UtilHttp {
     }
 
     public static CloseableHttpClient getAllowAllHttpClient() {
-        return getAllowAllHttpClient("component://base/config/ofbizssl.jks", "changeit");
+        return getAllowAllHttpClient("component://framework/config/ofbizssl.jks", "changeit");
     }
 
     public static CloseableHttpClient getAllowAllHttpClient(String jksStoreFileName, String jksStorePassword) {
